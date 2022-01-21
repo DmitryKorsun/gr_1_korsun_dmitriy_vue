@@ -45,6 +45,7 @@ export default {
 .logo-header {
   margin-left: 30px;
   padding: 10px 0;
+  width: 190px;
 }
 .logo-header:hover {
   cursor: pointer;
@@ -90,5 +91,83 @@ input[type="text"]:focus {
 }
 #form-search {
   width: 15%;
+}
+@media (max-width: 1190px) {
+  .logo-header {
+    width: 200px;
+  }
+  li {
+    margin: 0 15px;
+    font-size: 20px;
+  }
+}
+@media (max-width: 1000px) {
+  #header {
+    flex-direction: column;
+  }
+  .logo-header {
+    width: 250px;
+  }
+  li {
+    margin: 0 20px;
+    padding: 10px 0;
+    font-size: 30px;
+  }
+  #form-search {
+    width: 25%;
+    padding-bottom: 10px;
+  }
+}
+@media (max-width: 870px) {
+  li {
+    margin: 0 15px;
+    padding: 10px 0;
+    font-size: 25px;
+  }
+  #form-search {
+    width: 40%;
+  }
+}
+@media (max-width: 710px) {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  li {
+    margin: 0 15px;
+    padding: 10px 0;
+    font-size: 25px;
+    width: 25%;
+  }
+  #form-search {
+    width: 35%;
+  }
+}
+@media (max-width: 600px) {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  li {
+    margin: 0 15px;
+    padding: 10px 0;
+    font-size: 25px;
+    width: 30%;
+  }
+  #form-search {
+    width: 50%;
+  }
+}
+@media (max-width: 420px) {
+  ul {
+    flex-direction: column;
+  }
+  #form-search {
+    width: 60%;
+  }
 }
 </style>
