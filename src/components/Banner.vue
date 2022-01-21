@@ -1,0 +1,100 @@
+<template>
+  <div class="banner-container">
+    <div class="video-block">
+      <video autoplay loop muted src="../assets/video.mp4"></video>
+    </div>
+    <div class="banner-text">
+      <h1>О фильме</h1>
+      <p>Раз превратное вы картину предаваться но какими возлюбил приносило которого открывший то потому физическими,
+        чтобы если того, то говорил потому чтобы поняли: само, физическими иной избегает eсли того и собой</p>
+      <button id="play-movie-button">
+        <span>Посмотреть</span>
+      </button>
+      <button id="info-movie-button">
+        <span>Информация</span>
+      </button>
+    </div>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Banner"
+}
+</script>
+
+<style>
+.banner-container {
+  display: flex;
+  align-items: center;
+  height: 500px;
+  width: 100%;
+  position: relative;
+  background: #1414147e;
+}
+
+.banner-container > .video-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 99%;
+  overflow: hidden;
+}
+
+.banner-container > .video-block > video {
+  width: 100%;
+}
+
+.banner-text {
+  margin-left: 40px;
+  width: 500px;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: default;
+}
+
+.banner-text h1 {
+  color: orange;
+  text-shadow: white 0.1em 0.1em 0.4em;
+  font-size: 50px;
+  margin-bottom: 30px;
+}
+
+.banner-text p {
+  color: white;
+  text-shadow: white 0 0.1em 0.4em;
+  text-align: justify;
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+
+.banner-text button {
+  border: none;
+  background: orange;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  transition: transform 0.5s;
+}
+
+.banner-text button:hover {
+  background: antiquewhite;
+  color: black;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+#play-movie-button {
+  width: 150px;
+  height: 30px;
+  margin-right: 20px;
+}
+
+#info-movie-button {
+  width: 190px;
+  height: 30px;
+}
+</style>
