@@ -1,30 +1,28 @@
 <template>
   <div id="app">
-    <Header />
-    <Home_page/>
+    <Header/>
+    <router-view></router-view>
+    <Footer/>
   </div>
 </template>
-
 <script>
 import Header from "@/components/Header";
-import Home_page from "@/page/Home_page";
+import Footer from "@/components/Footer";
 export default {
-  name: 'App',
+  name:"App",
   components: {
-    Header,Home_page
+    Header, Footer,
   }
 }
 </script>
-
 <style>
-#app {
-/*  font-family: Avenir, Helvetica, Arial, sans-serif;
+/*#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;*/
-}
+}*/
 * {
   margin: 0;
   padding: 0;
@@ -34,4 +32,16 @@ body {
   background-color:antiquewhite;
   height: 100vh;
 }
+/*#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}*/
 </style>

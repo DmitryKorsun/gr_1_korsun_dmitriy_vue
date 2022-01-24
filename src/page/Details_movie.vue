@@ -54,13 +54,18 @@ export default {
 
 <style>
 #details-movie {
-  background: gray;
+  background: url("../assets/poster.jpeg");
+  background-position: center;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 789px;
 }
 
 #container-details {
+  background: #1414147e;
   width: 100%;
   height: 100%;
   display: flex;
@@ -129,7 +134,6 @@ color: #ffB100;
   grid-gap: 30px;
 }
 #full-details-movie p{
-  border: 2px solid black;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -141,6 +145,6 @@ color: #ffB100;
   margin-bottom: 15px;
 }
 #full-details-movie span {
-  color: black;
+  color: white;
 }
 </style>

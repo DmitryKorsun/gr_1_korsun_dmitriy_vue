@@ -13,7 +13,9 @@
         <img class="img-banner" src="../assets/movie-bannerjpg.jpg">
       </slide>
       <slide class="id-movie">
-        <img class="img-banner" src="../assets/movie-bannerjpg.jpg">
+        <div @click="detail_movie_id">
+          <img class="img-banner" src="../assets/poster.jpeg">
+        </div>
       </slide>
       <slide class="id-movie">
         <img class="img-banner" src="../assets/movie-bannerjpg.jpg">
@@ -80,6 +82,11 @@ export default {
   },
   components: {
     Carousel, Slide
+  },
+  methods: {
+    detail_movie_id(){
+      this.$router.push({name:'Details_movie'})
+    }
   }
 }
 </script>
