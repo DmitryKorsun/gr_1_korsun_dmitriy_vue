@@ -6,6 +6,9 @@ import Serials from "@/page/Serials";
 import Films from "@/page/Films";
 import Movies from "@/page/Movies";
 import Favorit from "@/page/Favorit";
+import RegistrationForm from "@/components/RegistrationForm";
+import LoginForm from "@/components/LoginForm";
+import UserCabinet from "@/page/UserCabinet";
 
 Vue.use(VueRouter)
 
@@ -39,6 +42,21 @@ const routes = [
     path: '/details_movie',
     name: 'Details_movie',
     component: Details_movie
+  },
+  {
+    path: '/registrationForm',
+    name: 'RegistrationForm',
+    component: RegistrationForm
+  },
+  {
+    path: '/loginForm',
+    name: 'LoginForm',
+    component: LoginForm
+  },
+  {
+    path: '/userCabinet',
+    name: 'UserCabinet',
+    component: UserCabinet
   },
 ]
 

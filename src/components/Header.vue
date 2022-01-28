@@ -12,11 +12,12 @@
     </nav>
     <div id="form-search">
       <form>
-        <input type="text" name="text" placeholder="Начните поиск фильма..."/>
+        <input class="search-form" type="text" name="text" placeholder="Начните поиск фильма..."/>
       </form>
     </div>
-    <div id="icon-search">
-
+    <modal-kabinet v-if="modalCabinetVisible" @closeModalCabinet="closeInfoModalCabinet"></modal-kabinet>
+    <div id="icon-search" @click="showCabinetUser">
+      Аккаунт
     </div>
   </div>
 </template>
@@ -28,7 +29,8 @@ export default {
   name: "Header",
   data() {
     return {
-      image_logo
+      image_logo,
+      modalCabinetVisible: false
     }
   },
   methods: {
@@ -46,12 +48,22 @@ export default {
     },
     Favorite_navigate() {
       this.$router.push({name: 'Favorit'})
+    },
+    showCabinetUser() {
+      this.modalCabinetVisible = true
+    },
+    closeInfoModalCabinet() {
+      this.modalCabinetVisible = false
     }
   }
 }
 </script>
 
 <style>
+#icon-search {
+  padding-right: 10px;
+}
+
 #header {
   display: flex;
   align-items: center;
@@ -98,7 +110,7 @@ nav {
   color: aqua;
 }
 
-input[type="text"] {
+.search-form {
   width: 1px;
   border: none;
   color: black;
@@ -112,7 +124,7 @@ input[type="text"] {
   transition: width 0.4s ease-in-out;
 }
 
-input[type="text"]:focus {
+.search-form:focus {
   width: 100%;
 }
 

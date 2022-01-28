@@ -17,7 +17,7 @@
         </ul>
       </div>
       <div class="footer-down-block">
-        <p>©2021 Korsun D.V.</p>
+        <p>©2022 Korsun D.V.</p>
         <span>Условия пользования</span>
         <span>Политика конфиденциальности</span>
       </div>
