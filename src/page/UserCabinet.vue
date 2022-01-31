@@ -6,11 +6,11 @@
     <div class="information-user">
       <form action="" v-for="option in userInfos" :value="option.loginUser" :key="option">
         <label for="login">Логин пользователя:</label>
-        <input :value="option.loginUser" id="login" :readonly="true">
+        <input :value="option.loginUser" id="login" @focusin="readonlyChangeOff" :readonly="true">
         <label for="Email">Почта пользователя:</label>
-        <input :value="option.UserEmail" id="Email" :readonly="true">
+        <input :value="option.UserEmail" id="Email" @focusin="readonlyChangeOff" :readonly="true">
         <label for="password">Пароль:</label>
-        <input type="password" :value="option.PasswordUser" id="password" :readonly="true">
+        <input type="password" :value="option.PasswordUser" id="password" @focusin="readonlyChangeOff" :readonly="true">
         <button class="reg-button" type="submit" @click="readonly=false">Изменить информацию</button>
       </form>
     </div>

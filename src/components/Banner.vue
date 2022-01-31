@@ -1,12 +1,11 @@
 <template>
   <div class="banner-container">
-    <div class="video-block">
-      <video autoplay loop muted src="../assets/video.mp4"></video>
+    <div class="video-block" v-for="movie in postBanners" :key="movie">
+      <video autoplay loop muted :src="movie.videoBanner"></video>
     </div>
-    <div class="banner-text">
-      <h1>О фильме</h1>
-      <p>Раз превратное вы картину предаваться но какими возлюбил приносило которого открывший то потому физическими,
-        чтобы если того, то говорил потому чтобы поняли: само, физическими иной избегает eсли того и собой</p>
+    <div class="banner-text" v-for="movie in postBanners" :key="movie">
+      <h1>{{ movie.title }}</h1>
+      <p>{{ movie.description }}</p>
       <button id="play-movie-button">
         <span>Посмотреть</span>
       </button>
@@ -19,8 +18,16 @@
 </template>
 
 <script>
+
 export default {
-  name: "Banner"
+  name: "Banner",
+  computed: {
+    postBanners() {
+      return this.$store.state.FilmsNew.moviesBanner
+    }
+  },
+  created() {
+  }
 }
 </script>
 

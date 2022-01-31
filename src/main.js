@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from "./store";
 import VueCarousel from 'vue-carousel';
 import router from './router'
 import UniqueInput from "@/components/UI_components/UniqueInput";
@@ -15,6 +16,6 @@ Vue.component('UniqueSelect', UniqueSelect);
 Vue.component('ModalKabinet', ModalKabinet);
 Vue.component('UniqueCheckbox', UniqueCheckbox);
 new Vue({
-  router,
+  router,store,
   render: h => h(App)
 }).$mount('#app')

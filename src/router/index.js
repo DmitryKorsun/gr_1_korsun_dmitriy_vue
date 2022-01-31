@@ -39,7 +39,7 @@ const routes = [
     component: Favorit
   },
   {
-    path: '/details_movie',
+    path: '/details_movie/:idMovie',
     name: 'Details_movie',
     component: Details_movie
   },

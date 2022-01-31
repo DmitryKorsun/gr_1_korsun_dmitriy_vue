@@ -1,5 +1,5 @@
 <template>
-  <div id="details-movie">
+  <div id="details-movie" >
     <div id="container-details">
       <div id="movie-info-watch">
 
@@ -7,6 +7,7 @@
       <div id="description-movie">
         <div id="title-movie">
           Охотники за приведениями
+
         </div>
         <div id="plot-movie">
           В городке Саммервилл где-то в Оклахоме творятся странные дела — конспирологические теории летают в воздухе,
@@ -14,7 +15,7 @@
           провинциалов, а странное наследие местной легенды — «грязного фермера», который погиб, пытаясь оградить
           родные края от нечисти.
         </div>
-        <button id="add-favorites-movie" @click="add_to_favorites_list">Добавить в избранное</button>
+        <button id="add-favorites-movie" @click="add_to_favorites_list(MovieId())">Добавить в избранное</button>
         <div id="full-details-movie">
           <p>
             Время просмотра
@@ -36,6 +37,7 @@
             Аудиодорожки
             <span>Русский</span>
           </p>
+          <pre>{{movieList()}}</pre>
           <p>
             Награды
             <span>Высшая награда за труд бла бла бла</span>
@@ -43,12 +45,32 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
+import {MovieBase} from '@/baseOn'
 export default {
-  name: "Details_movie"
+  name: "Details_movie",
+  data (){
+    return{
+    moviesDetail:[],
+    }
+  },
+  mounted() {
+    this.movieList()
+  },
+  methods: {
+    movieList(){
+      try {
+        const {dataMovie} = MovieBase(`i=${this.$route.params.id}`)
+        this.moviesDetail = dataMovie;
+      }catch (error){
+        console.log(error)
+      }
+    }
+  }
 }
 </script>
 
