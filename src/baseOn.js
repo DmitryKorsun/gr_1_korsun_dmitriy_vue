@@ -1,7 +1,8 @@
 import axios from "axios";
 
-export const MovieBase = type => {
+export const MoviesDataBase = (type) => {
     return axios.create({
-        baseUrl:`http://www.omdbapi.com/?apikey=2f027767&${type}`
-    })
-}
+        baseURL: `https://www.omdbapi.com/?apikey=2f027767&${type}`,
+        method: 'GET',
+    });
+};

@@ -1,34 +1,12 @@
 <template>
   <div id="movies-list">
-    <h2>Новые фильмы</h2>
     <div class="slider">
+      <h2>{{ description }}</h2>
       <carousel :per-page="6" :navigate-to="0" :mouse-drag="true" :paginationEnabled="false" :navigationEnabled="true"
                 :navigationClickTargetSize="9">
-        <slide class="id-movie" :key="movieNewList.id" v-for="movieNewList in movieNew">
-          <div @click="detail_movie_id(movieNewList.id)">
-            <img class="img-banner" :src="movieNewList.imgPoster">
-          </div>
-        </slide>
-      </carousel>
-    </div>
-      <h2>Рекомендуем посмотреть</h2>
-    <div class="slider">
-      <carousel :per-page="6" :navigate-to="0" :mouse-drag="true" :paginationEnabled="false" :navigationEnabled="true"
-                :navigationClickTargetSize="9">
-        <slide class="id-movie" :key="movieNewList.id" v-for="movieNewList in movieNew">
-          <div @click="detail_movie_id(movieNewList.id)">
-            <img class="img-banner" :src="movieNewList.imgPoster">
-          </div>
-        </slide>
-      </carousel>
-    </div>
-      <h2>Про всякое</h2>
-    <div class="slider">
-      <carousel :per-page="6" :navigate-to="0" :mouse-drag="true" :paginationEnabled="false" :navigationEnabled="true"
-                :navigationClickTargetSize="9">
-        <slide class="id-movie" :key="movieNewList.id" v-for="movieNewList in movieNew">
-          <div @click="detail_movie_id(movieNewList.id)">
-            <img class="img-banner" :src="movieNewList.imgPoster">
+        <slide class="id-movie" :key="movied.imdbID + Math.random()" v-for="movied in movies">
+          <div @click="detailMovie(movied.imdbID)">
+            <img class="img-banner" :src="movied.Poster">
           </div>
         </slide>
       </carousel>
@@ -38,34 +16,38 @@
 
 <script>
 import {Carousel, Slide} from 'vue-carousel';
-import {MovieBase} from '@/baseOn'
+import {MoviesDataBase} from '../baseOn'
+
 export default {
   name: "Movie",
-  computed: {
-    movieNew() {
-      return this.$store.state.FilmsNew.moviesNew
-    }
-  },
   data() {
     return {
       paginationButtons: false,
-      moviesDetail:[],
+      movies: [],
     }
   },
+  props: {
+    type: String,
+    description: String,
+  },
+
   components: {
     Carousel, Slide
   },
+  mounted() {
+    this.getMovieDetail();
+  },
   methods: {
-    detail_movie_id(id) {
-      this.$router.push({name: 'Details_movie',params:{idMovie: id}})
-    },
-    getMoviesDetail(){
+    async getMovieDetail () {
       try {
-        const {data:{searchMovie}} = MovieBase(this.type).get();
-        this.moviesDetail = searchMovie
+        const {data: {Search} } = await MoviesDataBase(this.type).get(`https://www.omdbapi.com/?apikey=2f027767&${this.type}`);
+        this.movies = Search;
       }catch (error){
-        console.log(error)
+        console.error(error);
       }
+    },
+    detailMovie (id) {
+      this.$router.push({name:'Details_movie', params:{idMOVIE: id}})
     }
   }
 }

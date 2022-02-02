@@ -4,7 +4,7 @@
       <div class="icon-user"></div>
     </div>
     <div class="information-user">
-      <form action="" v-for="option in userInfos" :value="option.loginUser" :key="option">
+      <form v-for="option in userInfos" :value="option.loginUser" :key="option">
         <label for="login">Логин пользователя:</label>
         <input :value="option.loginUser" id="login" @focusin="readonlyChangeOff" :readonly="true">
         <label for="Email">Почта пользователя:</label>
@@ -12,12 +12,14 @@
         <label for="password">Пароль:</label>
         <input type="password" :value="option.PasswordUser" id="password" @focusin="readonlyChangeOff" :readonly="true">
         <button class="reg-button" type="submit" @click="readonly=false">Изменить информацию</button>
+        <button class="reg-button" @clickю.prevent="Logauth">Выйти из аккаунта</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "UserCabinet",
   methods: {
@@ -25,6 +27,11 @@ export default {
       event.preventDefault()
       event.target.removeAttribute('readonly')
       console.log(event)
+    },
+    Logauth() {
+      this.$store.dispatch('user/LogauthGit').then((result) => {
+        console.log('loginResult', result)
+      })
     },
   },
   data() {

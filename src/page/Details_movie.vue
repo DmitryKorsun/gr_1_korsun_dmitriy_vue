@@ -1,46 +1,40 @@
 <template>
-  <div id="details-movie" >
+  <div id="details-movie">
     <div id="container-details">
       <div id="movie-info-watch">
-
       </div>
       <div id="description-movie">
         <div id="title-movie">
-          Охотники за приведениями
-
+          {{ movies.Title }}
         </div>
         <div id="plot-movie">
-          В городке Саммервилл где-то в Оклахоме творятся странные дела — конспирологические теории летают в воздухе,
-          и даже школьные учителя всерьез говорят о странной сейсмической активности. Но всё это не выдумки скучающих
-          провинциалов, а странное наследие местной легенды — «грязного фермера», который погиб, пытаясь оградить
-          родные края от нечисти.
+          {{ movies.Plot }}
         </div>
-        <button id="add-favorites-movie" @click="add_to_favorites_list(MovieId())">Добавить в избранное</button>
+        <button id="add-favorites-movie" @click="addToMyFavoritesList">Добавить в избранное</button>
         <div id="full-details-movie">
           <p>
             Время просмотра
-            <span>60 минут</span>
+            <span>{{ movies.Runtime }}</span>
           </p>
           <p>
             Актеры
-            <span>Кэрри Кун, Пол Радд, Финн Вулфхард, МакКенна Грейс, Логан Ким, Селеста О’Коннор, Билл Мюррей, Дэн Эйкройд, Эрни Хадсон, Энни Поттс</span>
+            <span>{{ movies.Actors }}</span>
           </p>
           <p>
             Режиссёр
-            <span>Джейсон Райтман</span>
+            <span>{{ movies.Director }}</span>
           </p>
           <p>
             Жанр
-            <span>Фантастика, Комедии, Боевики</span>
+            <span>{{ movies.Genre }}</span>
           </p>
           <p>
             Аудиодорожки
-            <span>Русский</span>
+            <span>{{ movies.Language }}</span>
           </p>
-          <pre>{{movieList()}}</pre>
           <p>
             Награды
-            <span>Высшая награда за труд бла бла бла</span>
+            <span>{{ movies.Awards }}</span>
           </p>
         </div>
       </div>
@@ -50,25 +44,30 @@
 </template>
 
 <script>
-import {MovieBase} from '@/baseOn'
+import {MoviesDataBase} from "@/baseOn";
+
 export default {
   name: "Details_movie",
-  data (){
-    return{
-    moviesDetail:[],
+  data() {
+    return {
+      movies: [],
     }
   },
   mounted() {
-    this.movieList()
+    this.getDetail();
   },
   methods: {
-    movieList(){
+    async getDetail() {
       try {
-        const {dataMovie} = MovieBase(`i=${this.$route.params.id}`)
-        this.moviesDetail = dataMovie;
-      }catch (error){
-        console.log(error)
+        const {data} = await MoviesDataBase(`i=${this.$route.params.idMOVIE}`).get(`https://www.omdbapi.com/?apikey=2f027767&plot=full&i=${this.$route.params.idMOVIE}`);
+        this.movies = data
+      } catch (error) {
+        console.error(error)
       }
+    },
+    addToMyFavoritesList() {
+      this.$store.commit('addToMyFavorites', this.movies)
+      alert('Добавлено в избранное')
     }
   }
 }
@@ -76,7 +75,6 @@ export default {
 
 <style>
 #details-movie {
-  background: url("../assets/poster.jpeg");
   background-position: center;
   background-size: cover;
   display: flex;
@@ -127,7 +125,7 @@ export default {
   align-items: center;
   width: 45%;
   color: orange;
-  font-family: "Lucida Sans","Lucida Sans",Geneva, Verdana,sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans", Geneva, Verdana, sans-serif;
   text-align: justify;
 }
 
@@ -137,12 +135,12 @@ export default {
   text-shadow: black 0.1em 0.1em 0.2em;
   font-size: 35px;
   text-align: center;
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #plot-movie {
-color: #ffB100;
-  font-family: Arial,sans-serif;
+  color: #ffB100;
+  font-family: Arial, sans-serif;
   font-size: 14px;
   text-align: justify;
   text-shadow: black 0.1em 0.1em 0.2em;
@@ -150,12 +148,14 @@ color: #ffB100;
   flex-direction: column;
   width: 60%;
 }
+
 #full-details-movie {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
 }
-#full-details-movie p{
+
+#full-details-movie p {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -166,6 +166,7 @@ color: #ffB100;
   font-size: 18px;
   margin-bottom: 15px;
 }
+
 #full-details-movie span {
   color: white;
 }
