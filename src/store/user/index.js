@@ -4,26 +4,36 @@ import {
     signInWithEmailAndPassword,
     GithubAuthProvider,
     signInWithPopup,
-    signOut
+    signOut,
 } from "firebase/auth";
+
+function isValid(token) {
+    return token !== '';
+}
 
 export default {
     namespaced: true,
     state() {
         return {
             email: '',
+            name: '',
             uid: '',
-            auth: ` `,
+            auth: '',
         }
     },
     getters: {
-        /*        isAuth(state){
-                    return state.uid !== ''
-                }*/
+        isAuth(state) {
+            return isValid(state.uid)
+        }
     },
-    mutations: {},
+    mutations: {
+        setUser(state, data) {
+            state.name = data.email
+            state.uid = data.uid
+        }
+    },
     actions: {
-        getAuth() {
+        gitHubAuth() {
             const auth = getAuth();
             const provider = new GithubAuthProvider();
             provider.addScope('repo');
@@ -46,24 +56,28 @@ export default {
                 console.error(error)
             });
         },
-        login(context, data) {
+        loginUser(context, data) {
             const auth = getAuth();
-            return signInWithEmailAndPassword(auth, data.email, data.password)
+            return signInWithEmailAndPassword(auth, data.login, data.password)
                 .then((userCredential) => {
+                    console.log(userCredential);
+                    context.state.name = userCredential.user.email
                     context.state.uid = userCredential.user.uid;
                     return 'Ok'
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
                     console.error(errorMessage)
+                    return 'error'
                 });
         },
         Sign(context, data) {
             const auth = getAuth();
-            return createUserWithEmailAndPassword(auth, data.email, data.password)
+            return createUserWithEmailAndPassword(auth, data.login, data.password)
                 .then((userCredential) => {
+                    context.state.name = userCredential.user.email
                     context.state.uid = userCredential.user.uid;
-                    return 'Ok'
+                    return 'Ok reg'
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
@@ -71,8 +85,16 @@ export default {
                 });
         },
         logaut(context) {
-            context.state.uid = ''
-            context.state.email = ''
+            const auth = getAuth()
+            signOut(auth).then(() => {
+                context.state.uid = ''
+                context.state.name = ''
+                if (context.state.uid === '' || context.state.name === '') {
+                    alert('Выход успешный')
+                } else {
+                    alert('Ошибка выхода')
+                }
+            })
         }
     },
 }

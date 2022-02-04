@@ -5,7 +5,7 @@
       <p>Заполните все формы для входа в аккаунт</p>
       <hr>
       <label for="email">Введите email</label>
-      <input id="email" v-model="email">
+      <input id="email" v-model="login">
       <label for="password">Введите password</label>
       <input id="password" v-model="password">
 
@@ -25,18 +25,22 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      email: '',
+      login: '',
       password: '',
     }
   },
   methods: {
     Login() {
-      this.$store.dispatch('user/login', {email: this.email, password: this.password}).then((result) => {
-        console.log('loginResult', result)
+      this.$store.dispatch('user/loginUser', {login: this.login, password: this.password}).then((status) => {
+        if (status === 'Ok') {
+          this.$router.push('/userCabinet')
+        } else if (status === 'error') {
+          alert('Ошибка');
+        }
       })
     },
     LoginGithub() {
-      this.$store.dispatch('user/getAuth').then(() => {
+      this.$store.dispatch('user/gitHubAuth').then(() => {
         console.log('loginResult')
       })
     },

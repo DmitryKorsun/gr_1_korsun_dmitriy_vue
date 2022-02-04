@@ -12,7 +12,7 @@
         <label for="password">Пароль:</label>
         <input type="password" :value="option.PasswordUser" id="password" @focusin="readonlyChangeOff" :readonly="true">
         <button class="reg-button" type="submit" @click="readonly=false">Изменить информацию</button>
-        <button class="reg-button" @clickю.prevent="Logauth">Выйти из аккаунта</button>
+        <button class="reg-button" @click.prevent="LogauthUser">Выйти из аккаунта</button>
       </form>
     </div>
   </div>
@@ -28,15 +28,16 @@ export default {
       event.target.removeAttribute('readonly')
       console.log(event)
     },
-    Logauth() {
-      this.$store.dispatch('user/LogauthGit').then((result) => {
-        console.log('loginResult', result)
-      })
-    },
+    LogauthUser() {
+      this.$store.dispatch('user/logaut');
+      this.$router.push('/')
+    }
   },
   data() {
     return {
       readonly: true,
+      login: '',
+      password: '',
       userInfos: [
         {
           loginUser: 'Dmitry', UserEmail: 'dsdsds@gmail.com', PasswordUser: 'sadvduudhduj7627yhdsii'

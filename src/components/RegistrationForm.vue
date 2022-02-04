@@ -7,9 +7,9 @@
       <unique-input unique_input_title="Введите Логин" unique_id="reg-form-login"
                     unique_placeholder="Введите ваш логин на сайте"></unique-input>
       <unique-input unique_input_title="Введите Email" unique_id="reg-form-em"
-                    unique_placeholder="Введите Email"></unique-input>
+                    unique_placeholder="Введите Email" v-model="login"></unique-input>
       <unique-input unique_input_title="Введите пароль" unique_id="reg-form-pass" unique_placeholder="Введите пароль"
-                    unique_type="password"></unique-input>
+                    unique_type="password" v-model="password"></unique-input>
       <unique-input unique_input_title="Повторите пароль" unique_id="reg-form-pass-pass"
                     unique_placeholder="Повторите пароль" unique_type="password"></unique-input>
       <hr>
@@ -19,7 +19,8 @@
       <unique-select></unique-select>
       <hr>
       <p class="confirm-politics">Создавая аккаунт вы соглашаетесь с <a href="">Политика конфиденциальности</a>.
-        <unique-checkbox unique_title_check="Согласиться?" unique_id_check="Сheak" unique_value_check="Подтверждение"></unique-checkbox>
+        <unique-checkbox unique_title_check="Согласиться?" unique_id_check="Сheak"
+                         unique_value_check="Подтверждение"></unique-checkbox>
       </p>
       <button class="reg-button" type="submit">Регистрация</button>
     </div>
@@ -32,6 +33,12 @@
 <script>
 export default {
   name: "RegistrationForm",
+  data() {
+    return {
+      login: '',
+      password: '',
+    }
+  },
   methods: {
     loginCabinet() {
       this.$router.push({name: 'LoginForm'})
