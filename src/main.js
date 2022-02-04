@@ -29,6 +29,7 @@ const firebaseConfig = {
     apiKey: "AIzaSyCoKy77SYQDrcq54tL3EgDKqSknKF_oJco",
     authDomain: "gitauth-6a0c7.firebaseapp.com",
     projectId: "gitauth-6a0c7",
+    databaseURL: "https://gitauth-6a0c7-default-rtdb.firebaseio.com",
     storageBucket: "gitauth-6a0c7.appspot.com",
     messagingSenderId: "219878918564",
     appId: "1:219878918564:web:85690a715349f875185931",
@@ -37,3 +38,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
+
+import {getDatabase, ref, onValue} from "firebase/database";
+
+const db = getDatabase();
+const starRef = ref(db, 'Posts/');
+onValue(starRef, (snapshot) => {
+    console.log('Posts', snapshot);
+});

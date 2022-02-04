@@ -17,9 +17,10 @@ export default {
   computed: {
     movies() {
       return [
-        {id: 1, type: 's=matrix', description: 'Новое'},
-        {id: 2, type: 's=spider', description: 'Рекомендуем посмотреть'},
-        {id: 3, type: 's=avengers', description: 'Про всякое'},
+        {id: 1, type: 's=matrix', description: 'Матрица'},
+        {id: 2, type: 's=spider', description: 'Человек Паук'},
+        {id: 3, type: 's=avengers', description: 'Мстители'},
+        {id: 4, type: 's=Batman', description: 'Бетмен'},
       ]
     }
   }

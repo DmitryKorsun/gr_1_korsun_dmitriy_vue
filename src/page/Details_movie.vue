@@ -1,40 +1,41 @@
 <template>
   <div id="details-movie">
     <div id="container-details">
+      <img class="img-poster-back" :src="movie.Poster" alt="">
       <div id="movie-info-watch">
       </div>
       <div id="description-movie">
         <div id="title-movie">
-          {{ movies.Title }}
+          {{ movie.Title }}
         </div>
         <div id="plot-movie">
-          {{ movies.Plot }}
+          {{ movie.Plot }}
         </div>
         <button id="add-favorites-movie" @click="addToMyFavoritesList">Добавить в избранное</button>
         <div id="full-details-movie">
           <p>
             Время просмотра
-            <span>{{ movies.Runtime }}</span>
+            <span>{{ movie.Runtime }}</span>
           </p>
           <p>
             Актеры
-            <span>{{ movies.Actors }}</span>
+            <span>{{ movie.Actors }}</span>
           </p>
           <p>
             Режиссёр
-            <span>{{ movies.Director }}</span>
+            <span>{{ movie.Director }}</span>
           </p>
           <p>
             Жанр
-            <span>{{ movies.Genre }}</span>
+            <span>{{ movie.Genre }}</span>
           </p>
           <p>
             Аудиодорожки
-            <span>{{ movies.Language }}</span>
+            <span>{{ movie.Language }}</span>
           </p>
           <p>
             Награды
-            <span>{{ movies.Awards }}</span>
+            <span>{{ movie.Awards }}</span>
           </p>
         </div>
       </div>
@@ -50,7 +51,7 @@ export default {
   name: "Details_movie",
   data() {
     return {
-      movies: [],
+      movie: [],
     }
   },
   mounted() {
@@ -60,20 +61,26 @@ export default {
     async getDetail() {
       try {
         const {data} = await MoviesDataBase(`i=${this.$route.params.idMOVIE}`).get(`https://www.omdbapi.com/?apikey=2f027767&plot=full&i=${this.$route.params.idMOVIE}`);
-        this.movies = data
+        this.movie = data
       } catch (error) {
         console.error(error)
       }
     },
     addToMyFavoritesList() {
-      this.$store.commit('addToMyFavorites', this.movies)
-      alert('Добавлено в избранное')
+      this.$store.commit('addToFavoriteList', this.movie)
     }
   }
 }
 </script>
 
 <style>
+.img-poster-back {
+  position: absolute;
+  width: 100%;
+  z-index: -10;
+  height: 1000px;
+}
+
 #details-movie {
   background-position: center;
   background-size: cover;

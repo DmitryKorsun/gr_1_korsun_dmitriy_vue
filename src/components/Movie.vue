@@ -38,16 +38,16 @@ export default {
     this.getMovieDetail();
   },
   methods: {
-    async getMovieDetail () {
+    async getMovieDetail() {
       try {
-        const {data: {Search} } = await MoviesDataBase(this.type).get(`https://www.omdbapi.com/?apikey=2f027767&${this.type}`);
+        const {data: {Search}} = await MoviesDataBase(this.type).get(`https://www.omdbapi.com/?apikey=2f027767&${this.type}&page=1`);
         this.movies = Search;
-      }catch (error){
+      } catch (error) {
         console.error(error);
       }
     },
-    detailMovie (id) {
-      this.$router.push({name:'Details_movie', params:{idMOVIE: id}})
+    detailMovie(id) {
+      this.$router.push({name: 'Details_movie', params: {idMOVIE: id}})
     }
   }
 }
