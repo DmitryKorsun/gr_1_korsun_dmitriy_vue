@@ -86,15 +86,21 @@ export default {
         },
         logaut(context) {
             const auth = getAuth()
-            signOut(auth).then(() => {
-                context.state.uid = ''
-                context.state.name = ''
-                if (context.state.uid === '' || context.state.name === '') {
-                    alert('Выход успешный')
-                } else {
-                    alert('Ошибка выхода')
-                }
-            })
+            let conf = confirm('Вы точно хотите выйти?')
+            if (conf == true){
+                signOut(auth).then(() => {
+                    context.state.uid = ''
+                    context.state.name = ''
+                    if (context.state.uid === '' || context.state.name === '') {
+                        alert('Выход успешный')
+                    } else {
+                        alert('Ошибка выхода')
+                    }
+                })
+            }else {
+                alert('Выход отменен')
+            }
+
         }
     },
 }

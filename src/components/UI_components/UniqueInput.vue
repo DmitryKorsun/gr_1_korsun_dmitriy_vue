@@ -1,7 +1,7 @@
 <template>
   <div>
     <label :for="unique_id">{{ unique_input_title }}</label>
-    <input v-model="modelValue" :id="unique_id" :type="unique_type" :placeholder="unique_placeholder">
+    <input :id="unique_id" :type="unique_type" :placeholder="unique_placeholder">
   </div>
 </template>
 
@@ -9,10 +9,6 @@
 export default {
   name: "UniqueInput",
   props: {
-    modelValue: {
-      type: String,
-      default: '',
-    },
     unique_id: {
       type: String,
       default: 'form'

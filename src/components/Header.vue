@@ -8,13 +8,14 @@
         <li @click="Films_navigate">Фильмы</li>
         <li @click="Movie_navigate">Мультфильмы</li>
         <li @click="Favorite_navigate">Избанное</li>
+        <li @click="Search_navigate">Поиск</li>
       </ul>
     </nav>
-    <div id="form-search">
+<!--    <div id="form-search">
       <form>
         <input class="search-form" type="text" name="text" placeholder="Начните поиск фильма..."/>
       </form>
-    </div>
+    </div>-->
     <modal-kabinet v-if="modalCabinetVisible" @closeModalCabinet="closeInfoModalCabinet"></modal-kabinet>
     <div id="icon-search" @click="showCabinetUser">
       Аккаунт
@@ -48,6 +49,9 @@ export default {
     },
     Favorite_navigate() {
       this.$router.push({name: 'Favorit'})
+    },
+    Search_navigate () {
+      this.$router.push({name: 'Search'})
     },
     showCabinetUser() {
       this.modalCabinetVisible = true

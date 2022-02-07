@@ -9,6 +9,7 @@ import Favorit from "@/page/Favorit";
 import RegistrationForm from "@/components/RegistrationForm";
 import LoginForm from "@/components/LoginForm";
 import UserCabinet from "@/page/UserCabinet";
+import Search from "@/page/Search";
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
     path: '/userCabinet',
     name: 'UserCabinet',
     component: UserCabinet
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   },
 ]
 
